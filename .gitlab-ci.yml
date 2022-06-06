@@ -7,6 +7,7 @@ stage-build:
       before_script:
          - sudo apt install composer -y
          - git config --global user.name "gitlab-runner"
+         - git config --global user.email "s.ponidelnik@gmail.com"
       script:
          - composer -v
          - git checkout main
