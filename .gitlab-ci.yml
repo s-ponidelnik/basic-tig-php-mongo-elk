@@ -34,4 +34,4 @@ stage-build:
 stage-deploy:
         stage: deploy
         script:
-            - cd /var/www/prjctr & git pull https://gitlab-ci-token:${CI_JOB_TOKEN}@$CI_SERVER_HOST:$CI_PROJECT_PATH.git
+            - cd /var/www/prjctr & git checkout HEAD:main & git pull https://gitlab-ci-token:${CI_JOB_TOKEN}@$CI_SERVER_HOST:$CI_PROJECT_PATH.git
