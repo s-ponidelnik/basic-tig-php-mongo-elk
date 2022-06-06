@@ -14,8 +14,8 @@ stage-build:
          - sudo apt install composer -y
          - git config --global user.name "${GITLAB_USER_NAME}"
          - git config --global user.email "${GITLAB_USER_EMAIL}"
-         - git remote remove main || true  # Local repo state may be cached
-         - git remote add main "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
+         - git remote remove git@gitlab.com:s_ponidielnik/basic-tig-php-mongo-elk.git || true  # Local repo state may be cached
+         - git remote add git@gitlab.com:s_ponidielnik/basic-tig-php-mongo-elk.git "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
       script:
          - git checkout main
          - git pull
@@ -24,7 +24,7 @@ stage-build:
          - git add test.log
          - git commit -m 'deploy' test.log
          - echo 'test'
-         - git push "HEAD:main"
+         - git push git@gitlab.com:s_ponidielnik/basic-tig-php-mongo-elk.git HEAD:main
 #stage-deploy:
 #        stage: deploy
 #        script:
