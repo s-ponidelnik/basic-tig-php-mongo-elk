@@ -6,9 +6,10 @@ stage-build:
       stage: build
       before_script:
          - sudo apt install composer -y
+         - git config --global user.name "gitlab-runner"
       script:
-         - git checkout main
          - composer -v
+         - git checkout main
          - touch test.log
          - echo 'test-ok' > test.log
          - git add test.log
