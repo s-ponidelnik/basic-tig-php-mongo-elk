@@ -12,7 +12,7 @@ stage-build:
          - touch testfile.log
          - echo 'test'>testfile.log
          - git add testfile.log
-         - git commit - m "deploy" -a
+         - git commit - m "deploy" testfile.log
          - git push
 #stage-deploy:
 #        stage: deploy
