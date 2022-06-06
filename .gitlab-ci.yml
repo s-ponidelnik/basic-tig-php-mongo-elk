@@ -15,7 +15,7 @@ stage-build:
          - git remote remove ssh_origin || true  # Local repo state may be cached
          - git remote add ssh_origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
       script:
-         - git checkout "HEAD:${CI_DEFAULT_BRANCH}"
+         - git checkout "{CI_DEFAULT_BRANCH}"
          - git pull
          - touch test.log
          - echo 'test' > test.log
