@@ -4,6 +4,8 @@ stages:
 stage-build:
       image: php:7.3
       stage: build
+      only:
+         - main
       before_script:
          - mkdir -p ~/.ssh/
          - echo "${CI_KNOWN_HOSTS}" > ~/.ssh/known_hosts
@@ -15,14 +17,14 @@ stage-build:
          - git remote remove ssh_origin || true  # Local repo state may be cached
          - git remote add ssh_origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
       script:
-         - git checkout {CI_DEFAULT_BRANCH}
+         - git checkout main
          - git pull
          - touch test.log
          - echo 'test' > test.log
          - git add test.log
          - git commit -m 'deploy' test.log
          - echo 'test'
-         - git push "HEAD:${CI_DEFAULT_BRANCH}"
+         - git push "HEAD:main"
 #stage-deploy:
 #        stage: deploy
 #        script:
