@@ -9,9 +9,11 @@ stage-build:
          - git config --global user.name "gitlab-runner"
          - git config --global user.email "s.ponidelnik@gmail.com"
       script:
-         - composer -v
-         - git status
-         - git log
+         - touch testfile.log
+         - echo 'test'>testfile.log
+         - git add testfile.log
+         - git commit - m "deploy" -a
+         - git push
 #stage-deploy:
 #        stage: deploy
 #        script:
