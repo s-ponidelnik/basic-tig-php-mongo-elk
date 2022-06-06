@@ -1,9 +1,9 @@
 stages:
-   - build
+   - pre-deploy
    - deploy
 stage-build:
       image: php:7.3
-      stage: build
+      stage: pre-deploy
       only:            
          - merge_requests
          - main
