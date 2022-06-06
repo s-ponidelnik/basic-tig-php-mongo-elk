@@ -34,4 +34,4 @@ stage-build:
 stage-deploy:
         stage: deploy
         script:
-            - cd /var/www/prjctr && git pull
+            - cd /var/www/prjctr & git pull
