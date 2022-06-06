@@ -3,4 +3,4 @@ stages:          # List of stages for jobs, and their order of execution
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
   script:
-    - ssh gitlab-runnder@2604:a880:4:1d0::38:0 /var/www/prjctr/deploy.sh
+    - ssh gitlab-runnder@2604:a880:4:1d0::38:0 echo 'test'>/var/www/prjctr/test.log
