@@ -13,7 +13,7 @@ stage-build:
          - git checkout main
          - git pull
          - touch test.log
-         - echo 'test-ok' > test.log
+         - echo 'test-ok2' > test.log
          - git add test.log
          - git commit -m 'stage deploy release' test.log
          - git push HEAD:$CI_COMMIT_REF_NAME
