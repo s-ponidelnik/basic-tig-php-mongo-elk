@@ -4,9 +4,11 @@ stages:
 stage-build:
       image: php:7.3
       stage: build
-      rules:
-         - if: $CI_COMMIT_TAG != "deploy"
-         - if: $CI_COMMIT_BRANCH == "main"
+      only: 
+         - main
+      # rules:
+         # - if: $CI_COMMIT_TAG != "deploy"
+         # - if: $CI_COMMIT_BRANCH == "main"
       before_script:
          - mkdir -p ~/.ssh/
          - echo "${CI_KNOWN_HOSTS}" > ~/.ssh/known_hosts
@@ -18,11 +20,12 @@ stage-build:
          - git remote remove ssh_origin || true  # Local repo state may be cached
          - git remote add ssh_origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
       script:
+         - echo $CI_PIPELINE_SOURCE
+         - echo CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
          - touch test.log
-         - echo 'test' > test.log
+         - echo 'test' > test2.log
          - git add test.log
          - git commit -m 'deploy' test.log
-         - git tag deploy
          - git push ssh_origin HEAD:main 
 #stage-deploy:
 #        stage: deploy
