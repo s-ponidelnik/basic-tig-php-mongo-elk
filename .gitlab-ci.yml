@@ -31,9 +31,7 @@ stage-build:
          - git add test.log
          - git commit -m 'deploy' test.log
          - git push ssh_origin HEAD:main 
-#stage-deploy:
-#        stage: deploy
-#        script:
-#            - sudo mkdir /var/www/prjctr/gitlab_test
-#            - sudo touch /var/www/prjctr/gitlab_test/test
-#            - sudo bash -c 'echo "test" > /var/www/prjctr/gitlab_test/test'
+stage-deploy:
+        stage: deploy
+        script:
+            - cd /var/www/prjctr && git pull
