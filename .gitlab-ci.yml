@@ -5,4 +5,10 @@ stage-build:
     stage: build
     image: ubuntu:20.04
     script:
-        - echo "test"
+        - mkdir build
+        - cd build
+        - echo "test" > test.log
+    artifacts:
+        paths:
+            - "build/"
+        expire_in: 30 days
