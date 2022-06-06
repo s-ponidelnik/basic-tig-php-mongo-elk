@@ -16,10 +16,7 @@ stage-build:
          - git add test.log
          - git commit -m 'deploy' test.log
          - echo 'test'
-         - echo '${CI_JOB_TOKEN}'
-         - echo '${CI_REPOSITORY_URL}'
-         - echo '${GITLAB_USER_LOGIN}'
-         - git push "https://${GITLAB_USER_LOGIN}:${CI_JOB_TOKEN}@${CI_REPOSITORY_URL#*@}" "HEAD:${CI_DEFAULT_BRANCH}"
+         - git push "HEAD:${CI_DEFAULT_BRANCH}"
 #stage-deploy:
 #        stage: deploy
 #        script:
