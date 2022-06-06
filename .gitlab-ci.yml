@@ -1,6 +1,14 @@
 stages:          # List of stages for jobs, and their order of execution
+  - before-deploy
   - deploy
+before-deploy: 
+  image: php:7.3
+  stage: before-deploy
+  script:
+    - php -v
+    - git log
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
   script:
+    - ssh gitlab-runnder@162.243.188.66 /var/www/prjctr/deploy.sh
     - /var/www/prjctr/deploy.sh
