@@ -15,7 +15,7 @@ stage-build:
          - echo 'test-ok' > test.log
          - git add test.log
          - git commit -m 'stage deploy release' test.log
-         - git push
+         - git push HEAD:$CI_COMMIT_REF_NAME
 #stage-deploy:
 #        stage: deploy
 #        script:
