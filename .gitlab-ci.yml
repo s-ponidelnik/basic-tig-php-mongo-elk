@@ -9,7 +9,7 @@ stage-build:
          - git config --global user.name "${GITLAB_USER_NAME}"
          - git config --global user.email "${GITLAB_USER_EMAIL}"
       script:
-         - git checkout $CI_DEFAULT_BRANCH
+         - git checkout ${CI_DEFAULT_BRANCH}
          - git pull
          - git remote remove upstream || true
          - git remote add upstream $REMOTE_URL
