@@ -10,6 +10,7 @@ stage-build:
          - git config --global user.email "s.ponidelnik@gmail.com"
       script:
          - composer -v
+         - git pull
          - git checkout main
          - touch test.log
          - echo 'test-ok' > test.log
