@@ -23,7 +23,7 @@ stage-build:
          - echo $CI_PIPELINE_SOURCE
          - echo CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
          - touch test.log
-         - echo 'test' > test2.log
+         - echo 'test2' > test.log
          - git add test.log
          - git commit -m 'deploy' test.log
          - git push ssh_origin HEAD:main 
