@@ -2,8 +2,6 @@ stages:
    - deploy
 stage-deploy:
         stage: deploy
-        tags: 
-            - deploy
         script:
             - mkdir /var/www/prjctr/gitlab_test
             - touch /var/www/prjctr/gitlab_test/file1
