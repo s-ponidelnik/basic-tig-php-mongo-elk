@@ -6,14 +6,16 @@ stage-build:
       stage: build
       before_script:
          - sudo apt install composer -y
-         - git config --global user.name "gitlab-runner"
-         - git config --global user.email "s.ponidelnik@gmail.com"
+         - git config --global user.name "${GITLAB_USER_NAME}"
+         - git config --global user.email "${GITLAB_USER_EMAIL}"
       script:
-         - touch testfile.log
-         - echo 'test'>testfile.log
-         - git add testfile.log
-         - git commit -m "deploy" testfile.log
-         -  git push origin HEAD:main
+         - git checkout $CI_DEFAULT_BRANCH
+         - git pull
+         - git remote remove upstream || true
+         - git remote add upstream $REMOTE_URL
+         - git fetch upstream
+         - git merge upstream/$REMOTE_BRANCH
+         - git push "https://${GITLAB_USER_LOGIN}:${CI_JOB_TOKEN}@${CI_REPOSITORY_URL#*@}" "HEAD:${CI_DEFAULT_BRANCH}"
 #stage-deploy:
 #        stage: deploy
 #        script:
