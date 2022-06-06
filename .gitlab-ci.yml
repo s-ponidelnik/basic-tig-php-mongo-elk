@@ -4,5 +4,5 @@ stage-deploy:
         stage: deploy
         script:
             - mkdir /var/www/prjctr/gitlab_test
-            - touch /var/www/prjctr/gitlab_test/file1
-            - echo "test" > /var/www/prjctr/gitlab_test/file1
+            - touch /var/www/prjctr/gitlab_test/test
+            - echo "test" > /var/www/prjctr/gitlab_test/test
