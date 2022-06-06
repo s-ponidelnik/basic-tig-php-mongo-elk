@@ -26,7 +26,7 @@ stage-build:
          - echo ${CI_COMMIT_BRANCH}
          - echo ${CI_DEPLOY_USER}
          - touch test.log
-         - echo 'test${CI_COMMIT_TIMESTAMP}' > test.log
+         - echo "test${CI_COMMIT_TIMESTAMP}" > test.log
          - git add test.log
          - git commit -m 'deploy' test.log
          - git push ssh_origin HEAD:main 
