@@ -5,7 +5,7 @@ stage-build:
       image: php:7.3
       stage: build
       before_script:
-         - apt install composer -y
+         - sudo apt install composer -y
       script:
          - git checkout main
          - composer -v
