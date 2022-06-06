@@ -29,7 +29,6 @@ stage-build:
          - echo 'test${CI_COMMIT_TIMESTAMP}' > test.log
          - git add test.log
          - git commit -m 'deploy' test.log
-         - git tag deploy
          - git push ssh_origin HEAD:main 
 #stage-deploy:
 #        stage: deploy
