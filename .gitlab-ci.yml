@@ -5,7 +5,7 @@ stage-build:
       image: php:7.3
       stage: build
       before_script:
-         - mkdir ~/.ssh/
+         - mkdir -p ~/.ssh/
          - echo "${CI_KNOWN_HOSTS}" > ~/.ssh/known_hosts
          - echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa
          - chmod 600 ~/.ssh/id_rsa
