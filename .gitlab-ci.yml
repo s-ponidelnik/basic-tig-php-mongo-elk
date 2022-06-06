@@ -13,7 +13,7 @@ stage-build:
          - echo 'test'>testfile.log
          - git add testfile.log
          - git commit -m "deploy" testfile.log
-         - git push
+         -  git push origin HEAD:main
 #stage-deploy:
 #        stage: deploy
 #        script:
