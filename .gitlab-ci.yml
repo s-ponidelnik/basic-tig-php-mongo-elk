@@ -39,5 +39,7 @@ stage-deploy:
    only: 
       - main
    stage: deploy
+   before_script:
+      - git config --global --add safe.directory /var/www/prjctr
    script:
       - cd /var/www/prjctr && composer release
