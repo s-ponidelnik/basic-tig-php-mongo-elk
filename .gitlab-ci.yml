@@ -11,6 +11,9 @@ test:
    before_script:
       - sudo apt install composer -y
    script:
+      - ls
+      - echo "${CI_PIPELINE_SOURCE}"
+      - echo $CI_PIPELINE_SOURCE
       - composer up
 stage-build:
    image: php:7.3
@@ -33,6 +36,8 @@ stage-build:
       - git commit -m 'deploy' -a
       - git push ssh_origin HEAD:main
 stage-deploy:
+   only: 
+      - main
    stage: deploy
    script:
       - cd /var/www/prjctr & git checkout HEAD:main & git pull https://gitlab-ci-token:${CI_JOB_TOKEN}@$CI_SERVER_HOST:$CI_PROJECT_PATH.git && composer release
