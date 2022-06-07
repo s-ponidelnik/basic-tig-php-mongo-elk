@@ -16,8 +16,10 @@ stage-build:
    image: php:7.3
    stage: pre-deploy
    rules:
-      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      - if: $CI_PIPELINE_SOURCE != "merge_request_event"
+        when: never
+      - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+        when: never
    before_script:
       - mkdir -p ~/.ssh/
       - echo "${CI_KNOWN_HOSTS}" > ~/.ssh/known_hosts
