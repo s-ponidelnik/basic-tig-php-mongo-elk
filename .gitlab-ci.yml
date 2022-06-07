@@ -15,11 +15,11 @@ stages:
 stage-build:
    image: php:7.3
    stage: pre-deploy
-#   rules:
-#      - if: $CI_PIPELINE_SOURCE != "merge_request_event"
-#        when: never
-#      - if: $CI_COMMIT_BRANCH != "main"
-#        when: never
+   rules:
+      - if: $CI_PIPELINE_SOURCE != "merge_request_event"
+        when: never
+      - if: $CI_COMMIT_BRANCH != "main"
+        when: never
    before_script:
       - echo $CI_COMMIT_BRANCH
       - echo $CI_PIPELINE_SOURCE
@@ -47,4 +47,6 @@ stage-deploy:
    before_script:
       - git config --global --add safe.directory /var/www/prjctr
    script:
+      - echo $CI_COMMIT_BRANCH
+      - echo $CI_PIPELINE_SOURCE
       - cd /var/www/prjctr && sudo composer release
