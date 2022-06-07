@@ -40,6 +40,9 @@ stage-build:
 stage-deploy:
    only: 
       - main
+   except:
+    refs:
+        - merge_requests
    stage: deploy
    before_script:
       - git config --global --add safe.directory /var/www/prjctr
