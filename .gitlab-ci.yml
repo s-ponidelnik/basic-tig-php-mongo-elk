@@ -1,17 +1,17 @@
 stages:
-   - test
+#   - test
    - pre-deploy
    - deploy
-test:
-   image: php:7.3
-   stage: test
-   only:
-      - merge_requests
-      - $CI_DEFAULT_BRANCH
-   before_script:
-      - sudo apt install composer -y
-   script:
-      - composer up
+#test:
+#   image: php:7.3
+#   stage: test
+#   only:
+#      - merge_requests
+#      - $CI_DEFAULT_BRANCH
+#   before_script:
+#      - sudo apt install composer -y
+#   script:
+#      - composer up
 stage-build:
    image: php:7.3
    stage: pre-deploy
