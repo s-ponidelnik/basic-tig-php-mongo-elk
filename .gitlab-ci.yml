@@ -15,11 +15,14 @@ stages:
 stage-build:
    image: php:7.3
    stage: pre-deploy
-   rules:
-      - if: $CI_PIPELINE_SOURCE != "merge_request_event"
-        when: never
-      - if: $CI_COMMIT_BRANCH != "main"
-        when: never
+   only: 
+      - main
+   #rules:
+      #- if: $CI_PIPELINE_SOURCE != "merge_request_event"
+      #  when: never
+      #- if: $CI_COMMIT_BRANCH != "main"
+      #  when: never
+   allow_failure: true
    before_script:
       - echo $CI_COMMIT_BRANCH
       - echo $CI_PIPELINE_SOURCE
