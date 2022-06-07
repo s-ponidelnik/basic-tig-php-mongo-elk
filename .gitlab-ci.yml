@@ -1,20 +1,20 @@
 stages:
-#   - test
-   - pre-deploy
+   - test
+   - build
    - deploy
-#test:
-#   image: php:7.3
-#   stage: test
-#   only:
-#      - merge_requests
-#      - $CI_DEFAULT_BRANCH
-#   before_script:
-#      - sudo apt install composer -y
-#   script:
-#      - composer up
+test:
+   image: php:7.3
+   stage: test
+   only:
+      - merge_requests
+      - main
+   before_script:
+      - sudo apt install composer -y
+   script:
+      - composer up
 stage-build:
    image: php:7.3
-   stage: pre-deploy
+   stage: build
    only: 
       - main
    #rules:
@@ -24,8 +24,6 @@ stage-build:
       #  when: never
    allow_failure: true
    before_script:
-      - echo $CI_COMMIT_BRANCH
-      - echo $CI_PIPELINE_SOURCE
       - mkdir -p ~/.ssh/
       - echo "${CI_KNOWN_HOSTS}" > ~/.ssh/known_hosts
       - echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa
@@ -50,6 +48,4 @@ stage-deploy:
    before_script:
       - git config --global --add safe.directory /var/www/prjctr
    script:
-      - echo $CI_COMMIT_BRANCH
-      - echo $CI_PIPELINE_SOURCE
       - cd /var/www/prjctr && sudo composer release
