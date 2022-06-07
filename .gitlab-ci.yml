@@ -8,7 +8,7 @@ test:
    only:
     - merge_requests
    before_script:
-      - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --filename=composer.phar && mv composer.phar /usr/local/bin/composer && rm composer-setup.php
+      - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --filename=composer.phar && sudo mv composer.phar /usr/local/bin/composer && rm composer-setup.php
       - ls
       - composer -v
    script:
@@ -23,7 +23,7 @@ build:
       - if: $CI_COMMIT_BRANCH == "main"
         when: always
    before_script:
-      - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --filename=composer.phar && mv composer.phar /usr/local/bin/composer && rm composer-setup.php
+      - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --filename=composer.phar && sudo mv composer.phar /usr/local/bin/composer && rm composer-setup.php
       - ls
       - composer -v   
       - git config --global user.name "gitlab-ci" && git config --global user.email "gitlab-ci@pmi.bet"
