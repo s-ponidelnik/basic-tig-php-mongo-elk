@@ -11,7 +11,8 @@ test:
       - sudo apt install composer -y
    script:
       - composer up
-stage-build:
+      # here can be some tests added
+build:
    image: php:7.3
    stage: build
    rules:
@@ -26,10 +27,9 @@ stage-build:
       - git remote remove ssh_origin || true  # Local repo state may be cached
       - git remote add ssh_origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
    script:
-      - echo $CI_COMMIT_AUTHOR
       - composer up
       - git diff-index --quiet HEAD -- || git commit -m "deploy ${CI_COMMIT_TIMESTAMP}" -a && git push ssh_origin HEAD:main;
-stage-deploy:
+deploy:
    rules:
       - if: $CI_COMMIT_AUTHOR == "gitlab-ci <gitlab-ci@pmi.bet>"
         when: never
@@ -37,5 +37,4 @@ stage-deploy:
         when: always
    stage: deploy
    script:
-      - echo $CI_COMMIT_AUTHOR
       - cd /var/www/prjctr && sudo composer release
