@@ -5,6 +5,7 @@ stages:
 test:
    image: php:7.3-fpm
    stage: test
+   environment: staging
    only:
     - merge_requests
    before_script:
@@ -16,6 +17,7 @@ test:
 build:
    image: php:7.3-fpm
    stage: build
+   environment: staging
    rules:
       - if: $CI_COMMIT_AUTHOR == "gitlab-ci <gitlab-ci@pmi.bet>"
         when: never
@@ -38,5 +40,6 @@ deploy:
       - if: $CI_COMMIT_BRANCH == "main"
         when: always
    stage: deploy
+   environment: staging
    script:
       - cd /var/www/prjctr && sudo composer release
