@@ -40,4 +40,4 @@ stage-deploy:
       - main
    stage: deploy
    script:
-      - cd /var/www/prjctr && composer release
+      - cd /var/www/prjctr && ls && composer release
