@@ -15,11 +15,14 @@ test:
 stage-build:
    image: php:7.3
    stage: build
-   only: 
-      - main
+   rules:
+      - if: $CI_COMMIT_BRANCH != "main"
+        when: never
+      - if: $CI_COMMIT_AUTHOR == "gitlab-ci <gitlab-ci@pmi.bet>"
+        when: never
    before_script:
       - sudo apt install composer -y
-      - git config --global user.email "pmi-gitlab@pmi.bet"
+      - git config --global user.name "gitlab-ci" && git config --global user.email "gitlab-ci@pmi.bet"
       - mkdir -p ~/.ssh/ && echo "${CI_KNOWN_HOSTS}" > ~/.ssh/known_hosts && echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
       - git remote remove ssh_origin || true  # Local repo state may be cached
       - git remote add ssh_origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
@@ -28,11 +31,11 @@ stage-build:
       - composer up
       - git diff-index --quiet HEAD -- || git commit -m "deploy ${CI_COMMIT_TIMESTAMP}" -a && git push ssh_origin HEAD:main;
 stage-deploy:
-   only: 
-      - main
-   except:
-    refs:
-        - merge_requests
+   rules:
+      - if: $CI_COMMIT_BRANCH != "main"
+        when: never
+      - if: $CI_COMMIT_AUTHOR == "gitlab-ci <gitlab-ci@pmi.bet>"
+        when: never
    stage: deploy
    script:
       - echo $CI_COMMIT_AUTHOR
