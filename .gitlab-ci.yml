@@ -1,6 +1,16 @@
 stages:
+   - test
    - build
    - deploy
+test:
+   image: php:7.3
+   stage: build
+   only:
+    - merge_requests
+   before_script:
+      - sudo apt install composer -y
+   script:
+      - composer up
 stage-build:
    image: php:7.3
    stage: build
