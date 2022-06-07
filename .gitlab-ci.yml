@@ -33,11 +33,11 @@ stage-build:
    script:
       - composer up
       - git add composer.lock
-      - git commit -m 'deploy' -a
+      - git commit -m "deploy ${CI_COMMIT_TIMESTAMP}" -a
       - git push ssh_origin HEAD:$CI_DEFAULT_BRANCH
 stage-deploy:
    only: 
       - main
    stage: deploy
    script:
-      - cd /var/www/prjctr && ls && composer release
+      - cd /var/www/prjctr && composer release
