@@ -1,27 +1,11 @@
 stages:
-   - test
    - build
    - deploy
-test:
-   image: php:7.3
-   stage: test
-   only:
-      - merge_requests
-      - main
-   before_script:
-      - sudo apt install composer -y
-   script:
-      - composer up
 stage-build:
    image: php:7.3
    stage: build
    only: 
       - main
-   #rules:
-      #- if: $CI_PIPELINE_SOURCE != "merge_request_event"
-      #  when: never
-      #- if: $CI_COMMIT_BRANCH != "main"
-      #  when: never
    allow_failure: true
    before_script:
       - mkdir -p ~/.ssh/
