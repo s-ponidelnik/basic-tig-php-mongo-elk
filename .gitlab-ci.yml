@@ -10,7 +10,6 @@ test:
    before_script:
       - sudo apt install composer -y
    script:
-      - echo $CI_COMMIT_AUTHOR
       - composer up
 stage-build:
    image: php:7.3
