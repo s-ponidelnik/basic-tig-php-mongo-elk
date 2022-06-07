@@ -18,7 +18,7 @@ stage-build:
    rules:
       - if: $CI_PIPELINE_SOURCE != "merge_request_event"
         when: never
-      - if: $CI_COMMIT_BRANCH != "main"
+      - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
         when: never
    before_script:
       - mkdir -p ~/.ssh/
@@ -38,7 +38,7 @@ stage-build:
       - git push ssh_origin HEAD:$CI_DEFAULT_BRANCH
 stage-deploy:
    only: 
-      - main
+      - $CI_DEFAULT_BRANCH
    stage: deploy
    script:
-      - cd /var/www/prjctr & git checkout HEAD:main & git pull https://gitlab-ci-token:$CI_JOB_TOKEN@$CI_SERVER_HOST:$CI_PROJECT_PATH.git && composer release
+      - cd /var/www/prjctr & git checkout HEAD:$CI_DEFAULT_BRANCH & git pull https://gitlab-ci-token:$CI_JOB_TOKEN@$CI_SERVER_HOST:$CI_PROJECT_PATH.git && composer release
