@@ -30,6 +30,7 @@ stage-build:
       - git remote add ssh_origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
    script:
       - composer up
+      - git add composer.lock
       - git commit -m 'deploy' -a
       - git push ssh_origin HEAD:$CI_DEFAULT_BRANCH
 stage-deploy:
