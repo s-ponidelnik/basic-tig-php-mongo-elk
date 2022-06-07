@@ -19,7 +19,8 @@ stage-build:
    script:
       - composer up
       - git commit -m "deploy ${CI_COMMIT_TIMESTAMP}" -a
-      - git status --porcelain | echo "Nothing to update" || git push ssh_origin HEAD:$CI_DEFAULT_BRANCH
+      - git status
+      - git push ssh_origin HEAD:$CI_DEFAULT_BRANCH
 stage-deploy:
    only: 
       - main
