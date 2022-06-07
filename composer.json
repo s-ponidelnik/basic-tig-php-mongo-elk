@@ -14,86 +14,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/merchant.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-cashmaal.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-p4f-brazil.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-directa24.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-gopaypro.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-vouchers.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-transact365.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-irgate.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-paytm.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-p2p.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-payconnect.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-interkassa.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-mpsa.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-pagsmile.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-zenpay-paylogic.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-zeropay.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-zigowallet.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-paystack.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-zenpay-payfair.git"
-        },
-        {
-            "type": "vcs",
-            "url": "git@gitlab.com:pm-international/pmipay/extensions/ps-opay.git"
         }
     ],
     "support": {
@@ -182,10 +102,10 @@
             "./vendor/bin/phpcbf --standard=psr12-ruleset.xml"
         ],
         "up": [
-            "composer update pmipay/yii2-pm-opay pmipay/yii2-pm-zenpay-payfair pmipay/yii2-pm-paystack pmipay/yii2-pm-zigowallet pmipay/yii2-pm-zer0pay pmipay/yii2-pm-zenpay-paylogic pmipay/yii2-pm-pagsmile pmipay/yii2-pm-mpsa pmipay/yii2-pm-interkassa pmipay/yii2-pm-payconnect pmipay/yii2-pm-p2p pmipay/yii2-pm-paytm pmipay/yii2-pm-irgate pmipay/yii2-pm-transact365 pmipay/yii2-pm-vouchers pmipay/yii2-pm-gopaypro pmipay/yii2-pm-directa24 pmipay/yii2-pm-p4f-brazil pmipay/yii2-pm-cashmaal pmipay/yii2-merchant"
+            "composer update"
         ],
         "release": [
-            "git pull && ./yii migrate/up --interactive=0 && composer install && ./migrate-all.sh && ./yii cache/flush-all"
+            "git pull"
         ],
         "test-migrate": [
             "./console/test/yii migrate && ./console/test/yii migrate --migrationPath=@console/migrations/"
