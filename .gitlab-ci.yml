@@ -10,7 +10,7 @@ test:
    stage: test
    only:
     - merge_requests
-    - $DEPLOY_BRANCH
+    - main
    before_script:
       - sudo apt install composer -y
    script:
@@ -19,7 +19,7 @@ stage-build:
    image: php:7.3
    stage: build
    only: 
-      - $DEPLOY_BRANCH
+      - main
    before_script:
       - sudo apt install composer -y
       - git config --global user.name "${GITLAB_USER_NAME}" && git config --global user.email "${GITLAB_USER_EMAIL}"
@@ -28,10 +28,10 @@ stage-build:
       - git remote add ssh_origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
    script:
       - composer up
-      - git diff-index --quiet HEAD -- || git commit -m "deploy ${CI_COMMIT_TIMESTAMP}" -a && git push ssh_origin HEAD:$DEPLOY_BRANCH;
+      - git diff-index --quiet HEAD -- || git commit -m "deploy ${CI_COMMIT_TIMESTAMP}" -a && git push ssh_origin HEAD:main;
 stage-deploy:
    only: 
-      - $DEPLOY_BRANCH
+      - main
    stage: deploy
    script:
       - cd $PROJECT_DIR && sudo composer release
