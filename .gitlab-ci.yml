@@ -1,6 +1,3 @@
-variables:
-  PROJECT_DIR: "/var/www/prjctr"
-  DEPLOY_BRANCH: "main"
 stages:
    - test
    - build
@@ -10,7 +7,6 @@ test:
    stage: test
    only:
     - merge_requests
-    - main
    before_script:
       - sudo apt install composer -y
    script:
@@ -32,6 +28,9 @@ stage-build:
 stage-deploy:
    only: 
       - main
+   except:
+    refs:
+        - merge_requests
    stage: deploy
    script:
-      - cd $PROJECT_DIR && sudo composer release
+      - cd /var/www/prjctr && sudo composer release
