@@ -15,8 +15,8 @@ stage-build:
    image: php:7.3
    stage: build
    rules:
-      #- if: $CI_COMMIT_AUTHOR == "gitlab-ci <gitlab-ci@pmi.bet>"
-      #  when: never
+      - if: $CI_COMMIT_AUTHOR == "gitlab-ci <gitlab-ci@pmi.bet>"
+        when: never
       - if: $CI_COMMIT_BRANCH == "main"
         when: always
    before_script:
