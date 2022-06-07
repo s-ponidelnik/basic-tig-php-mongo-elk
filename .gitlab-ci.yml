@@ -8,7 +8,7 @@ test:
    only:
     - merge_requests
    before_script:
-      - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --install-dir=bin --filename=composer && mv composer.phar /usr/local/bin/composer
+      - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --filename=composer && mv composer.phar /usr/local/bin/composer
       - composer -v
    script:
       - composer up
@@ -22,7 +22,7 @@ build:
       - if: $CI_COMMIT_BRANCH == "main"
         when: always
    before_script:
-      - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --install-dir=bin --filename=composer && mv composer.phar /usr/local/bin/composer
+      - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --filename=composer && mv composer.phar /usr/local/bin/composer
       - composer -v
       - git config --global user.name "gitlab-ci" && git config --global user.email "gitlab-ci@pmi.bet"
       - mkdir -p ~/.ssh/ && echo "${CI_KNOWN_HOSTS}" > ~/.ssh/known_hosts && echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
