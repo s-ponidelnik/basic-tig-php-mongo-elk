@@ -7,7 +7,7 @@ stages:
    - deploy
 test:
    image: php:7.3
-   stage: build
+   stage: test
    only:
     - merge_requests
     - $DEPLOY_BRANCH
