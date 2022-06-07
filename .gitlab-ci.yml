@@ -15,10 +15,10 @@ stage-build:
    image: php:7.3
    stage: build
    rules:
-      - if: $CI_COMMIT_BRANCH != "main"
-        when: never
       - if: $CI_COMMIT_AUTHOR == "gitlab-ci <gitlab-ci@pmi.bet>"
         when: never
+      - if: $CI_COMMIT_BRANCH == "main"
+        when: always
    before_script:
       - sudo apt install composer -y
       - git config --global user.name "gitlab-ci" && git config --global user.email "gitlab-ci@pmi.bet"
@@ -31,10 +31,10 @@ stage-build:
       - git diff-index --quiet HEAD -- || git commit -m "deploy ${CI_COMMIT_TIMESTAMP}" -a && git push ssh_origin HEAD:main;
 stage-deploy:
    rules:
-      - if: $CI_COMMIT_BRANCH != "main"
-        when: never
       - if: $CI_COMMIT_AUTHOR == "gitlab-ci <gitlab-ci@pmi.bet>"
         when: never
+      - if: $CI_COMMIT_BRANCH == "main"
+        when: always
    stage: deploy
    script:
       - echo $CI_COMMIT_AUTHOR
