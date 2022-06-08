@@ -4,6 +4,8 @@ stages:
    - deploy
 test:
    image: php:7.3-fpm
+   services:
+      - redis:latest
    stage: test
    environment: staging
    only:
@@ -14,6 +16,7 @@ test:
       - sudo echo "test">test.log
       - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --filename=composer.phar && sudo mv composer.phar /usr/local/bin/composer && rm composer-setup.php
    script:
+      - hostnamectl
       - composer up
       # here can be some tests added
 build:
