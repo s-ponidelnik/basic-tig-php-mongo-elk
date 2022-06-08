@@ -34,8 +34,10 @@ build:
       #- mkdir -p ~/.ssh/ && echo "${CI_KNOWN_HOSTS}" > ~/.ssh/known_hosts && echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
       #- git remote remove ssh_origin || true  # Local repo state may be cached
       #- git remote add ssh_origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
+   allow_failure: true
    script:
       - hostnamectl
+      - ls /var/www/prjctr
       #- composer up
       #- git diff-index --quiet HEAD -- || git commit -m "deploy ${CI_COMMIT_TIMESTAMP}" -a && git push ssh_origin HEAD:main;
 deploy:
@@ -48,4 +50,5 @@ deploy:
    environment: staging
    script:
       - hostnamectl
+      - ls /var/www/prjctr
       #- cd /var/www/prjctr && sudo composer release
