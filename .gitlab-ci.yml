@@ -10,6 +10,8 @@ test:
     - merge_requests
    before_script:
       - sudo apt-get install -y php-curl php-xml
+      - sudo touch test.log
+      - sudo echo "test">test.log
       - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --filename=composer.phar && sudo mv composer.phar /usr/local/bin/composer && rm composer-setup.php
    script:
       - composer up
