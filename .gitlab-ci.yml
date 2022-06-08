@@ -4,8 +4,6 @@ stages:
    - deploy
 test:
    image: php:7.3-fpm
-   services:
-      - redis:latest
    stage: test
    environment: staging
    only:
@@ -16,11 +14,12 @@ test:
       - sudo echo "test">test.log
       - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --filename=composer.phar && sudo mv composer.phar /usr/local/bin/composer && rm composer-setup.php
    script:
-      - hostnamectl
       - composer up
       # here can be some tests added
 build:
    image: php:7.3-fpm
+   services:
+      - redis:latest
    stage: build
    environment: staging
    rules:
@@ -28,16 +27,17 @@ build:
         when: never
       - if: $CI_COMMIT_BRANCH == "main"
         when: always
-   before_script:
-      - sudo apt-get install -y php-curl php-xml
-      - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --filename=composer.phar && sudo mv composer.phar /usr/local/bin/composer && rm composer-setup.php
-      - git config --global user.name "gitlab-ci" && git config --global user.email "gitlab-ci@pmi.bet"
-      - mkdir -p ~/.ssh/ && echo "${CI_KNOWN_HOSTS}" > ~/.ssh/known_hosts && echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
-      - git remote remove ssh_origin || true  # Local repo state may be cached
-      - git remote add ssh_origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
+  # before_script:
+   #   - sudo apt-get install -y php-curl php-xml
+    #  - curl -sS https://getcomposer.org/installer -o composer-setup.php && php composer-setup.php --version=2.3.5 --filename=composer.phar && sudo mv composer.phar /usr/local/bin/composer && rm composer-setup.php
+     # - git config --global user.name "gitlab-ci" && git config --global user.email "gitlab-ci@pmi.bet"
+      #- mkdir -p ~/.ssh/ && echo "${CI_KNOWN_HOSTS}" > ~/.ssh/known_hosts && echo "${DEPLOY_KEY}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+      #- git remote remove ssh_origin || true  # Local repo state may be cached
+      #- git remote add ssh_origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
    script:
-      - composer up
-      - git diff-index --quiet HEAD -- || git commit -m "deploy ${CI_COMMIT_TIMESTAMP}" -a && git push ssh_origin HEAD:main;
+      - hostnamectl
+      #- composer up
+      #- git diff-index --quiet HEAD -- || git commit -m "deploy ${CI_COMMIT_TIMESTAMP}" -a && git push ssh_origin HEAD:main;
 deploy:
    rules:
       - if: $CI_COMMIT_AUTHOR == "gitlab-ci <gitlab-ci@pmi.bet>"
@@ -47,4 +47,5 @@ deploy:
    stage: deploy
    environment: staging
    script:
-      - cd /var/www/prjctr && sudo composer release
+      - hostnamectl
+      #- cd /var/www/prjctr && sudo composer release
